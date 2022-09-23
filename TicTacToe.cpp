@@ -4,8 +4,11 @@ using namespace std;
 const int blank = 0;
 const int xSpace = 1;
 const int oSpace = 2;
+const int xTurn = 0;
+const int oTurn = 1;
 
 
+void playGame(int board[3][3]);
 void displayBoard(int board[3][3]);
 
 int main() {
@@ -34,5 +37,17 @@ void displayBoard(int board[3][3]) {
       }
     }
     cout << (char)character << "\t" << boardValues[0] << "\t" << boardValues[1] << "\t" << boardValues[2] << endl;
+  }
+}
+
+void playGame(int board[3][3]) {
+  
+  int turn = 0;
+  int boardXPos = 0;
+  int boardYPos = 0;
+  while(turn != 9) {
+    
+    
+    turn++;
   }
 }
