@@ -10,10 +10,13 @@ const int oTurn = 1;
 
 void playGame(int board[3][3]);
 void displayBoard(int board[3][3]);
+bool checkwin(int board[3][3], int player);
 
 int main() {
+  bool play = true;
   int board[3][3] = { {0,0,0}, {0,0,0}, {0,0,0} };
   displayBoard(board);
+  playGame(board);
   
   
   
@@ -26,6 +29,7 @@ void displayBoard(int board[3][3]) {
     int character = 97 + i;
     char boardValues[3];
     for(int j = 0; j < 3; j++) {
+      
       if(board[i][j] == blank) {
 	boardValues[j] = ' ';
       }
@@ -45,9 +49,119 @@ void playGame(int board[3][3]) {
   int turn = 0;
   int boardXPos = 0;
   int boardYPos = 0;
-  while(turn != 9) {
-    
-    
-    turn++;
+  int move = 0;
+  char movePos[2]; 
+  bool validMove = false;
+  while(turn != 9 && checkwin(board, move%2+1) == false) {
+    if(turn%2 == xTurn) {
+      move = xSpace;
+    }
+    else {
+      move = oSpace;
+    }
+    do {
+      cin >> movePos;
+      //cout << "movePos[0]: " << movePos[0] << endl;
+      //cout << "movePos[1]: " << movePos[1] << endl;
+      if(board[(int)movePos[1]-97][(int)movePos[0]-49] == blank) {
+	board[(int)movePos[1]-97][(int)movePos[0]-49] = move;
+	//cout << "board value: " << board[(int)movePos[0]-1][(int)movePos[1]-97] << endl;
+	//cout << "board pos x index: " << (int)movePos[0] - 49 << endl;
+	//cout << "board pos y index: " << (int) movePos[1] - 97 << endl;
+	turn++;
+      }
+    }while(validMove = false);
+    /*for(int i = 0; i < 3; i++) {
+      for(int j = 0; j < 3; j++) {
+	cout << "board[" << i << "][" << j <<"]: " << board[i][j] << endl;
+      }
+      }*/
+    displayBoard(board);
+  }
+}
+
+bool checkwin(int board[3][3], int player) {
+  if(board[0][0] == player && board[0][1] == player && board[0][2] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O Wins!" << endl;
+    }
+    return true;
+  }
+  else if(board[1][0] == player && board[1][1] == player && board[1][2] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  else if(board[2][0] == player && board[2][1] == player && board[2][2] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  else if(board[0][0] == player && board[1][0] == player && board[2][0] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  else if(board[0][1] == player && board[1][1] == player && board[2][1] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  else if(board[2][0] == player && board[2][1] == player && board[2][2] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  else if(board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  else if(board[2][0] == player && board[1][1] == player && board[0][2] == player) {
+    if(player == xSpace) {
+      cout << "X Wins!" << endl;
+    }
+    else {
+      cout << "O wins!" << endl;
+    }
+
+    return true;
+  }
+  //returns false if no win condition is satisfied
+  else {
+    return false;
   }
 }
