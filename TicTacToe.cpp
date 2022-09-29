@@ -14,10 +14,25 @@ bool checkwin(int board[3][3], int player);
 
 int main() {
   bool play = true;
-  int board[3][3] = { {0,0,0}, {0,0,0}, {0,0,0} };
-  displayBoard(board);
-  playGame(board);
+  char input = 'Y';
+
   
+  while(play == true) {
+    int board[3][3] = { {0,0,0}, {0,0,0}, {0,0,0} };
+    displayBoard(board);
+    playGame(board);
+    cout << "Type Y to play again, type N to stop" << endl;
+    cin >> input;
+    if(input == 'Y') {
+      play = true;
+    }
+    else if(input == 'y') {
+      play = true;
+    }
+    else {
+      play = false;
+    }
+  }
   
   
   return 0;
