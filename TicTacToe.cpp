@@ -52,7 +52,8 @@ void playGame(int board[3][3]) {
   int move = 0;
   char movePos[2]; 
   bool validMove = false;
-  while(turn != 9 && checkwin(board, move%2+1) == false) {
+  bool win = false;
+  while(turn != 9 && win == false) {
     if(turn%2 == xTurn) {
       move = xSpace;
     }
@@ -77,10 +78,19 @@ void playGame(int board[3][3]) {
       }
       }*/
     displayBoard(board);
+    win = checkwin(board, (move%2));
   }
 }
 
 bool checkwin(int board[3][3], int player) {
+  player++;
+  if(player == 1) {
+    player++;
+  }
+  else if(player == 2) {
+    player--;
+  }
+  //cout << "player: " << player << endl;
   if(board[0][0] == player && board[0][1] == player && board[0][2] == player) {
     if(player == xSpace) {
       cout << "X Wins!" << endl;
